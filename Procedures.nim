@@ -1,7 +1,21 @@
+import std/random
+randomize()
+
 type
   CustomRange = object
     low: int
     high: int
+
+type
+  Agent = tuple
+    name: string
+    profession: string
+
+type
+  Datalist = array[3, string]
+
+let names: Datalist = ["Arnold", "Matus", "Boris"]
+let professions: Datalist = ["robotnik", "ucitel", "predavac"]    
 
 iterator items(range: CustomRange): int =
   var i = range.low
@@ -15,6 +29,13 @@ iterator pairs(range: CustomRange): tuple[a: int, b: char] =
 
 proc make_population(n: int) =
   for i, c in CustomRange(low: 1, high: n):
-    echo c
+    # Pick a number in 0..2.
+    let num = rand(2)
+    doAssert num in 0..2
+    echo names[num]
+
+    let num2 = rand(2)
+    doAssert num2 in 0..2
+    echo professions[num2]  
 
 make_population(10)
